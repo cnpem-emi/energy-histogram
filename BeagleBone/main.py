@@ -2,10 +2,10 @@ from Adafruit_BBIO import GPIO, ADC
 from redis import *
 from time import sleep
 
-capDischarge  = "P9_xx" # Usar o mesmo pino do clear do FlipFLop ???
-voltageInput  = "P9_yy"
-triggerInput  = "P9_zz"
-clearFlipFlop = "P9_ww"
+#capDischarge  = "P9_xx" # Usar o mesmo pino do clear do FlipFLop ???
+voltageInput  = "P9_33"
+triggerInput  = "P8_15"
+clearFlipFlop = "P8_12"
 
 list_adc = [0]*4096
 
@@ -20,6 +20,7 @@ GPIO.output(clearFlipFlop, GPIO.HIGH)
 GPIO.setup(triggerInput, GPIO.IN)
 
 client = StrictRedis(host = "127.0.0.1")
+client.lpush("gammaenergy", 0, 0)
 
 while(True):
     while(not(GPIO.input(triggerInput))): # Waiting to receive start pulse
@@ -35,7 +36,9 @@ while(True):
 
     sleep(capDischarge_sleep)
 
-    client.set("GammaEnergy:List", list_adc)
+    client.lset("gammaenergy", 0, adc_value)
+    client.lset("gammaenergy", 1, list_adc[adc_value])
 
     GPIO.output(capDischarge, GPIO.LOW)
     GPIO.output(clearFlipFlop, GPIO.HIGH)
+
