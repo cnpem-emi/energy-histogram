@@ -68,7 +68,7 @@ const config = {
 var chart = new Chart(canvas, config);
 
 async function updateChart() {
-    const response = await fetch(`http://${window.location.host}:5000/all`);
+    const response = await fetch(`http://${window.location.host}:5001/all`);
     const data = await response.json();
 
     chart.data.datasets[0].data = data;
@@ -78,13 +78,13 @@ async function updateChart() {
 
 async function resetReadings() {
     if (!confirm('Are you sure you want to delete ALL readings? This operation cannot be reverted')) return;
-    await fetch(`http://${window.location.host}:5000/zero`, { method: "DELETE" });
+    await fetch(`http://${window.location.host}:5001/zero`, { method: "DELETE" });
     updateChart();
 }
 
 async function applyCapSleep() {
     // TODO: Filter input
-    await fetch(`http://${window.location.host}:5000/cap`, {
+    await fetch(`http://${window.location.host}:5001/cap`, {
         method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({
             time: parseFloat(document.getElementById("cap-sleep").value),
         }),
@@ -97,7 +97,7 @@ window.onload = async function () {
     document.getElementById("reset-readings").onclick = resetReadings;
     document.getElementById("apply-cap-sleep").onclick = applyCapSleep;
 
-    const response = await fetch(`http://${window.location.host}:5000/cap`);
+    const response = await fetch(`http://${window.location.host}:5001/cap`);
     const data = await response.json();
 
     document.getElementById("cap-sleep").value = data.time;
