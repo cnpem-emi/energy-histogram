@@ -27,8 +27,6 @@ class MeasureThread(Thread):
 
     def run(self):
         while True:
-            #while True:
-            #    self.list_adc[randint(0, 4095)] += 1
             while not GPIO.input(TRIGGER_INPUT): # Waiting to receive start pulse
                 pass
 

@@ -15,7 +15,27 @@
     <strong>This project doesn't work properly without JavaScript enabled.
         Please enable it to continue.</strong>
   </noscript>
+  <h1>Energy Level Histogram</h1>
   <canvas id="freq-chart" width="160" height="50"></canvas>
+  <label for="cap-sleep">Capacitor Discharge/Sleep Time</label>
+  <input id="cap-sleep" type="number">
+  <button id="apply-cap-sleep">Apply</button>
+  <br>
+  <div class="second-row">
+    <button id="reset-zoom">Reset Zoom</button>
+    <button id="reset-readings">Zero Readings</button>
+  </div>
 </body>
 
 </html>
+
+<style>
+  body {
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    text-align: center;
+  }
+  
+  .second-row {
+    margin-top: 0.2em;
+  }
+</style>
