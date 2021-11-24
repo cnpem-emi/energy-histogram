@@ -6,14 +6,16 @@ from random import randint
 from threading import Thread
 
 VOLTAGE_INPUT  = "P9_33"
-TRIGGER_INPUT  = "P8_15"
-CLEAR_FLIPFLOP = "P8_12"
+TRIGGER_INPUT  = "P9_24"
+CLEAR_FLIPFLOP = "P9_27"
 
 class MeasureThread(Thread):
     def __init__(self):
         self.list_adc = [0]*4096
         Thread.__init__(self)
         GPIO.setup(CLEAR_FLIPFLOP, GPIO.OUT)
+        GPIO.output(CLEAR_FLIPFLOP, GPIO.LOW)
+        sleep(1)
         GPIO.output(CLEAR_FLIPFLOP, GPIO.HIGH)
 
         GPIO.setup(TRIGGER_INPUT, GPIO.IN)
