@@ -1,6 +1,6 @@
 {
   "name": "energy-freq",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "Energy histogram graph",
   "main": "index.js",
   "author": "Guilherme Francisco",

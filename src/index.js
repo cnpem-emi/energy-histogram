@@ -93,6 +93,7 @@ async function applyCapSleep() {
 }
 
 window.onload = async function () {
+    document.getElementById("log").onchange = (e) => { chart.scales.y.type = e.checked ? "logarithmic" : "linear"; updateChart(); };
     document.getElementById("reset-zoom").onclick = chart.resetZoom;
     document.getElementById("reset-readings").onclick = resetReadings;
     document.getElementById("apply-cap-sleep").onclick = applyCapSleep;
